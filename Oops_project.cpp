@@ -36,6 +36,25 @@ void guessnumber_box(){
     jump(30,2);
     cout<<"----(Lottery - Guess the digit)----";
 }
+void guessnumber_indicator(int l, bool temp,int dif){
+    char a = 205,b = 206,c = 31/*20*/,d = 23,e = 200,f = 188,g = 186;
+    jump(9,9);
+    for(int i=9;i<=90;i++){
+        if(i==9){ cout<<g; jump(9,10); cout<<e;}
+        else if(i==90){ cout<<f; jump(90,9); cout<<g;}
+        else if(i==50){
+            cout<<b;
+            jump(50,9);
+            cout<<d;
+            jump(51,10);
+        }
+        else cout<<a;
+    }
+    if(temp) jump(50+dif,9);
+    else jump(50-dif,9);
+
+    cout<<c;
+}
 void guessnumber_screen(){
     int num,g,count = 1;
     string name;
@@ -52,21 +71,23 @@ void guessnumber_screen(){
     while(g!=num){
         count++;
         guessnumber_box();
-        jump(35,8);
+        jump(80,3);
         if(g>num){
             cout<<"Chances taken : "<<count;
-            jump(25,5);
+            guessnumber_indicator(g,1,g-num);
+            jump(28,6);
             cout<<"Too high! Guess a lower number : ";
         }
         else{
             cout<<"Chances taken : "<<count;
-            jump(25,5);
+            guessnumber_indicator(g,0,num-g);
+            jump(28,6);
             cout<<"Too low! Guess a higher number : ";
         }
         cin>>g;
     }
     guessnumber_box();
-    jump(20,4);
+    jump(20,7);
     cout<<"You made it "<<name<<"...It took you "<<count<<" chances to guess it right!";
     jump(0,13);   
 }
