@@ -50,6 +50,7 @@ void guessnumber_indicator(int l, bool temp,int dif){
         }
         else cout<<a;
     }
+
     if(temp) jump(50+dif,9);
     else jump(50-dif,9);
 
@@ -66,7 +67,7 @@ void guessnumber_screen(){
     cin>>name;
     guessnumber_box();
     jump(27,4);
-    cout<<"Guess random number between 1 - 100!\n\n\t\t\t\t   Choose your guess : ";
+    cout<<"Guess random number between 1 - 100!\n\n\t\t\t\t   Choose your guess :: ";
     cin>>g;
     while(g!=num){
         count++;
