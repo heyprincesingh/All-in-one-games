@@ -180,6 +180,7 @@ void player_turn(){
         case 8: row=2; column=1; break;
         case 9: row=2; column=2; break;
         default:
+            jump(30,11);
             cout<<"Invalid Move";
     }
 
@@ -190,8 +191,8 @@ void player_turn(){
         board[row][column] = 'o';
         turn = 'x';
     }else {
-        jump(20,11);
-        cout<<"Box already filled! Please choose another place!!";
+        jump(30,11);
+        cout<<"Invalid Move! Please choose another place!!";
         player_turn();
     }
     tictactoe_box();
@@ -233,7 +234,7 @@ void tictactoe_start(){
     }
     else{
         jump(44,10);
-        cout<<"GAME DRAW!!!";
+        cout<<"!!GAME DRAW!!";
     }
     jump(42,11);
     cout<<"(--Press Enter--)";
@@ -263,7 +264,7 @@ void tictactoe(){
     jump(38,3);
     cout<<"----( Tic - Tac - Toe )----\n\n";
     cout<<"\t\t\t\t\t  1. Play New Game\n\n";
-    cout<<"\t\t\t\t\t  2. Exit\n\n\n\n";
+    cout<<"\t\t\t\t\t  2. Exit";
     jump(38,10);
     input();
     cin>>t;
@@ -282,26 +283,93 @@ void tictactoe(){
         break;
     }
 }
+//TicTacToe code over
 
 
+//Millionaire code starts
+void Millionaire_question(){
+    rerun:
+    box();
+    int opt;
+    char p = 219,a = 186, b = 206, c = 205;
+    jump(42,1);
+    cout<<"Q U E S T I O N   1";
+    jump(0,2);
+    for(int i=0;i<100;i++){
+       cout<<p;
+   }
+   jump(1,6);
+    for(int i=0;i<98;i++){
+       cout<<p;
+   }
+   jump(1,8);
+    for(int i=0;i<98;i++){
+       cout<<c;
+   }
+   jump(1,10);
+    for(int i=0;i<98;i++){
+       cout<<p;
+   }
 
+   jump(4,7);
+   cout<<a;
+   jump(4,8);
+   cout<<b;
+   jump(4,9);
+   cout<<a;
+
+   jump(50,7);
+   cout<<a;
+   jump(50,8);
+   cout<<b;
+   jump(50,9);
+   cout<<a;
+
+   jump(54,7);
+   cout<<a;
+   jump(54,8);
+   cout<<b;
+   jump(54,9);
+   cout<<a;
+
+   jump(2,7);
+   cout<<"1";
+   jump(52,7);
+   cout<<"2";
+   jump(2,9);
+   cout<<"3";
+   jump(52,9);
+   cout<<"4";
+
+   jump(38,11);
+   input();
+   opt = getch();
+   opt -= 48;
+   if(opt>0 && opt<5) cout<<"Hello";
+   else goto rerun;
+   jump(0,13);
+}
 void Millionaire(){
     int m;
     box();
-    jump(28,3);
+    jump(35,3);
     cout<<"----( Millionaire Quizard )----\n\n";
-    cout<<"\t\t\t\t  1. Play New Game\n\n";
-    cout<<"\t\t\t\t  2. Exit\n\n\n\n";
-    jump(33,10);
+    cout<<"\t\t\t\t\t  1. Play New Game\n\n";
+    cout<<"\t\t\t\t\t  2. Exit";
+    jump(38,10);
     input();
     cin>>m;
     switch (m)
     {
-    case 2:
+        case 1:
+        Millionaire_question();
+        break;
+        
+        case 2:
         screen();
         break;
-    
-    default:
+        
+        default:
         Millionaire();
         break;
     }
