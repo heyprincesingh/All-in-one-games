@@ -3,6 +3,7 @@
 #include<conio.h>
 #include<string>
 #include<ctime>
+#include<fstream>
 #include<windows.h>
 using namespace std;
 
@@ -100,7 +101,8 @@ void guessnumber_screen(){
     cout<<"2. Exit"; 
     jump(33,10);
     input();
-    cin>>opt;
+    opt = getch();
+    opt -= 48;
     if(opt == 1) guessnumber_screen();
     else if(opt == 2) screen();
     else goto init;
@@ -114,7 +116,8 @@ void guessnumber(){
     cout<<"\t\t\t\t\t  2. Exit";
     jump(33,10);
     input();
-    cin>>l;
+    l = getch();
+    l -= 48;
     switch (l)
     {
         case 1:
@@ -253,7 +256,8 @@ void tictactoe_restart(){
     cout<<"2. Exit"; 
     jump(36,9);
     input();
-    cin>>opt;
+    opt = getch();
+    opt -= 48;
     if(opt == 1) tictactoe_start();
     else if(opt == 2) screen();
     else goto init;
@@ -267,7 +271,8 @@ void tictactoe(){
     cout<<"\t\t\t\t\t  2. Exit";
     jump(38,10);
     input();
-    cin>>t;
+    t = getch();
+    t -= 48;
     switch (t)
     {
         case 1:
@@ -287,20 +292,20 @@ void tictactoe(){
 
 
 //Millionaire code starts
-void Millionaire_question(){
-    rerun:
+void Millionaire_question();
+void Millionaire_question_screen(){
     box();
-    int opt;
-    char p = 219,a = 186, b = 206, c = 205;
+    char p = 219,a = 186, b = 206, c = 205,d = 203,e = 202;
     jump(42,1);
-    cout<<"Q U E S T I O N   1";
+    cout<<"Q U E S T I O N  1";     //jump(60,1);
     jump(0,2);
     for(int i=0;i<100;i++){
        cout<<p;
    }
    jump(1,6);
     for(int i=0;i<98;i++){
-       cout<<p;
+       if(i==3 || i==49 || i==53) cout<<d;
+       else cout<<c;
    }
    jump(1,8);
     for(int i=0;i<98;i++){
@@ -308,7 +313,8 @@ void Millionaire_question(){
    }
    jump(1,10);
     for(int i=0;i<98;i++){
-       cout<<p;
+       if(i==3 || i==49 || i==53) cout<<e;
+       else cout<<c;
    }
 
    jump(4,7);
@@ -340,15 +346,101 @@ void Millionaire_question(){
    cout<<"3";
    jump(52,9);
    cout<<"4";
-
-   jump(38,11);
-   input();
-   opt = getch();
-   opt -= 48;
-   if(opt>0 && opt<5) cout<<"Hello";
-   else goto rerun;
-   jump(0,13);
 }
+void Millionaire_restart(){
+    int opt;
+    box();
+    init:
+    jump(35,3);
+    cout<<"----( Millionaire Quizard )----\n\n";
+    jump(43,5);
+    cout<<"1. Play again";
+    jump(43,7);
+    cout<<"2. Exit"; 
+    jump(36,9);
+    input();
+    opt = getch();
+    opt -= 48;
+    if(opt == 1) Millionaire_question();
+    else if(opt == 2) screen();
+    else goto init;
+}
+void Millionaire_check(bool check,int prize){
+    box();
+    if(check){
+        int question_timer = 10;
+        jump(25,5);
+        cout<<"You gave the correct answer and you have won $"<<prize<<"....";
+        jump(36,7);
+        cout<<"Next Question in ";
+        while(question_timer>0){
+            jump(53,7);
+            cout<<question_timer<<" seconds  ";
+            question_timer--;
+            Sleep(1000);
+        }
+    }
+    else{
+        jump(28,5);
+        cout<<"Your answer was incorrect! You total won $"<<prize;
+        jump(45,7);
+        cout<<"Press Enter...";
+        getch();
+        Millionaire_restart();
+    }
+}
+void Millionaire_question(){
+    bool option;
+    string data,opt1,opt2,opt3,opt4,ans,opt;
+    int i = 1,prize = 0;
+    ifstream question("question.txt");
+    do{
+        Millionaire_question_screen();
+        getline(question,data);
+        getline(question,opt1);
+        getline(question,opt2);
+        getline(question,opt3);
+        getline(question,opt4);
+        getline(question,ans);
+        
+        jump(5,4);
+        cout<<data;
+        jump(6,7);
+        cout<<opt1;
+        jump(56,7);
+        cout<<opt2;
+        jump(6,9);
+        cout<<opt3;
+        jump(56,9);
+        cout<<opt4<<" "<<ans;
+        jump(40,11);
+        input();
+        i++;
+        int time = 10;
+        while(!_kbhit() && time>=0){
+            jump(95,2);
+            cout<<"   ";
+            jump(96,2);
+            cout<<time;
+            time--;
+            jump(61,11);
+            Sleep(1000);
+        }
+        if(time >= 0) opt = getch();
+        if(ans==opt){
+            prize += 500;
+            Millionaire_check(true,prize);
+            option = true;
+        }
+        else{
+            option = false;
+            question.close();
+            Millionaire_check(false,prize);
+        }
+    }while(option && i<=13);
+    question.close();
+}
+
 void Millionaire(){
     int m;
     box();
@@ -358,7 +450,8 @@ void Millionaire(){
     cout<<"\t\t\t\t\t  2. Exit";
     jump(38,10);
     input();
-    cin>>m;
+    m = getch();
+    m -= 48;
     switch (m)
     {
         case 1:
@@ -374,6 +467,8 @@ void Millionaire(){
         break;
     }
 }
+
+
 void screen(){
     int a;
     box();
@@ -386,7 +481,8 @@ void screen(){
     cout<<"\t\t\t\t    5. Exit\n\n\n\n";
     jump(33,11);
     input();
-    cin>>a;
+    a = getch();
+    a -= 48;
     switch (a)
     {
     case 1 :
