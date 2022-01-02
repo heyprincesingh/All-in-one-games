@@ -142,7 +142,7 @@ void guessnumber(){
 
  //TicTacToe code starts
 void tictactoe_restart();
-char board[3][3];// = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+char board[3][3];
 int choice;
 int row,column;
 char turn = 'x';
@@ -394,7 +394,7 @@ void Millionaire_check(bool check,int prize){
         Millionaire_restart();
     }
 }
-Millionaire_congo(int prize){
+void Millionaire_congo(int prize){
     box();
     jump(43,4);
     cout<<"!!Congratulations!!";
@@ -430,7 +430,7 @@ void Millionaire_question(){
         jump(6,9);
         cout<<opt3;
         jump(56,9);
-        cout<<opt4<<" "<<ans;
+        cout<<opt4;
         jump(40,11);
         input();
         i++;
@@ -683,7 +683,7 @@ void hunt_timer(){
     cout<<hunt_time - original_hunt_time;
 }
 void Treasure_Hunt(){
-    int x=92,y=6,flagg = 0;
+    int x=21,y=6,flagg = 0;
     time(&original_hunt_time);
     char a,b = 229;
     Treasure_Hunt_box();
