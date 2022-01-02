@@ -32,6 +32,10 @@ void box(){
 void input(){
     cout<<"Choose your option : ";
 }
+void Game_option(){
+    cout<<"\t\t\t\t\t  1. Play New Game\n\n";
+    cout<<"\t\t\t\t\t  2. Exit";
+}
 
 
  //Lottery code starts
@@ -112,8 +116,7 @@ void guessnumber(){
     box();
     jump(32,3);
     cout<<"----(Lottery - Guess the digit)----\n\n";
-    cout<<"\t\t\t\t\t  1. Play New Game\n\n";
-    cout<<"\t\t\t\t\t  2. Exit";
+    Game_option();
     jump(33,10);
     input();
     l = getch();
@@ -123,12 +126,13 @@ void guessnumber(){
         case 1:
         guessnumber_screen();
         break;
+
         case 2:
         screen();
         break;
-    
-    default:
-    guessnumber();
+        
+        default:
+        guessnumber();
         break;
     }
 } //Lottery code over
@@ -267,8 +271,7 @@ void tictactoe(){
     box();
     jump(38,3);
     cout<<"----( Tic - Tac - Toe )----\n\n";
-    cout<<"\t\t\t\t\t  1. Play New Game\n\n";
-    cout<<"\t\t\t\t\t  2. Exit";
+    Game_option();
     jump(38,10);
     input();
     t = getch();
@@ -297,7 +300,7 @@ void Millionaire_question_screen(){
     box();
     char p = 219,a = 186, b = 206, c = 205,d = 203,e = 202;
     jump(42,1);
-    cout<<"Q U E S T I O N  1";     //jump(60,1);
+    cout<<"Q U E S T I O N  ";
     jump(0,2);
     for(int i=0;i<100;i++){
        cout<<p;
@@ -381,13 +384,24 @@ void Millionaire_check(bool check,int prize){
         }
     }
     else{
-        jump(28,5);
+        jump(30,5);
         cout<<"Your answer was incorrect! You total won $"<<prize;
         jump(45,7);
         cout<<"Press Enter...";
         getch();
         Millionaire_restart();
     }
+}
+Millionaire_congo(int prize){
+    box();
+    jump(43,4);
+    cout<<"!!Congratulations!!";
+    jump(33,6);
+    cout<<"You did it! You have won total of $"<<prize;
+    jump(45,8);
+    cout<<"Press Enter...";
+    getch();
+    Millionaire_restart();
 }
 void Millionaire_question(){
     bool option;
@@ -403,6 +417,8 @@ void Millionaire_question(){
         getline(question,opt4);
         getline(question,ans);
         
+        jump(60,1);
+        cout<<i;
         jump(5,4);
         cout<<data;
         jump(6,7);
@@ -416,7 +432,7 @@ void Millionaire_question(){
         jump(40,11);
         input();
         i++;
-        int time = 10;
+        int time = 30;
         while(!_kbhit() && time>=0){
             jump(95,2);
             cout<<"   ";
@@ -438,6 +454,7 @@ void Millionaire_question(){
             Millionaire_check(false,prize);
         }
     }while(option && i<=13);
+    Millionaire_congo(prize);
     question.close();
 }
 
@@ -446,8 +463,7 @@ void Millionaire(){
     box();
     jump(35,3);
     cout<<"----( Millionaire Quizard )----\n\n";
-    cout<<"\t\t\t\t\t  1. Play New Game\n\n";
-    cout<<"\t\t\t\t\t  2. Exit";
+    Game_option();
     jump(38,10);
     input();
     m = getch();
@@ -469,9 +485,9 @@ void Millionaire(){
 }
 //Millionaire Ends
 
-//Path Finder Starts
+//Treasure_Hunt Finder Starts
 
-void Path_box(){
+void Treasure_Hunt_box(){
     char a,b = 229,c = 186,d = 205;
     box();
     for(int i=1;i<12;i++){
@@ -499,14 +515,14 @@ void Path_box(){
     jump(1,11);
     cout<<"  PRESS 0 TO EXIT  ";    
 }
-void Path_way_sequence_vertical(int x,int y){
+void Treasure_Hunt_sequence_vertical(int x,int y){
     char a=179;
     for(int i=1;i<12;i++){
         jump(x,i);
         if(i == y) cout<<" ";
     }
 }
-void Path_way_sequence_horizontal(int x,int y){
+void Treasure_Hunt_sequence_horizontal(int x,int y){
     char a = 195,b = 196,c = 180;
     jump(x-1,y);
     cout<<a;
@@ -515,7 +531,7 @@ void Path_way_sequence_horizontal(int x,int y){
     jump(x+1,y);
     cout<<c;
 }
-void Path_circuit(){
+void Treasure_Hunt_circuit(){
     char c=179,d=193,e=194;
     for(int i=1;i<12;i++){
         jump(23,i);
@@ -538,94 +554,94 @@ void Path_circuit(){
         else cout<<c;
     }
 
-    Path_way_sequence_vertical(25,10);
-    Path_way_sequence_vertical(27,8);
-    Path_way_sequence_vertical(27,4);
-    Path_way_sequence_vertical(27,2);
-    Path_way_sequence_vertical(29,2);
-    Path_way_sequence_vertical(31,5);
-    Path_way_sequence_vertical(33,11);
-    Path_way_sequence_vertical(35,9);
-    Path_way_sequence_vertical(35,5);
-    Path_way_sequence_vertical(35,1);
-    Path_way_sequence_vertical(37,2);
-    Path_way_sequence_vertical(39,4);
-    Path_way_sequence_vertical(41,6);
-    Path_way_sequence_vertical(43,3);
-    Path_way_sequence_vertical(43,8);
-    Path_way_sequence_vertical(43,11);
-    Path_way_sequence_vertical(45,11);
-    Path_way_sequence_vertical(47,7);
-    Path_way_sequence_vertical(49,3);
-    Path_way_sequence_vertical(51,10);
-    Path_way_sequence_vertical(53,8);
-    Path_way_sequence_vertical(55,4);
-    Path_way_sequence_vertical(57,2);
-    Path_way_sequence_vertical(57,7);
-    Path_way_sequence_vertical(57,10);
-    Path_way_sequence_vertical(59,11);
-    Path_way_sequence_vertical(61,8);
-    Path_way_sequence_vertical(63,6);
-    Path_way_sequence_vertical(65,3);
-    Path_way_sequence_vertical(67,9);
-    Path_way_sequence_vertical(69,2);
-    Path_way_sequence_vertical(71,4);
-    Path_way_sequence_vertical(73,3);
-    Path_way_sequence_vertical(75,7);
-    Path_way_sequence_vertical(77,10);
-    Path_way_sequence_vertical(77,4);
-    Path_way_sequence_vertical(77,2);
-    Path_way_sequence_vertical(79,2);
-    Path_way_sequence_vertical(81,6);
-    Path_way_sequence_vertical(83,9);
-    Path_way_sequence_vertical(85,11);
-    Path_way_sequence_vertical(87,1);
-    Path_way_sequence_vertical(89,5);
-    Path_way_sequence_vertical(91,9);
+    Treasure_Hunt_sequence_vertical(25,10);
+    Treasure_Hunt_sequence_vertical(27,8);
+    Treasure_Hunt_sequence_vertical(27,4);
+    Treasure_Hunt_sequence_vertical(27,2);
+    Treasure_Hunt_sequence_vertical(29,2);
+    Treasure_Hunt_sequence_vertical(31,5);
+    Treasure_Hunt_sequence_vertical(33,11);
+    Treasure_Hunt_sequence_vertical(35,9);
+    Treasure_Hunt_sequence_vertical(35,5);
+    Treasure_Hunt_sequence_vertical(35,1);
+    Treasure_Hunt_sequence_vertical(37,2);
+    Treasure_Hunt_sequence_vertical(39,4);
+    Treasure_Hunt_sequence_vertical(41,6);
+    Treasure_Hunt_sequence_vertical(43,3);
+    Treasure_Hunt_sequence_vertical(43,8);
+    Treasure_Hunt_sequence_vertical(43,11);
+    Treasure_Hunt_sequence_vertical(45,11);
+    Treasure_Hunt_sequence_vertical(47,7);
+    Treasure_Hunt_sequence_vertical(49,3);
+    Treasure_Hunt_sequence_vertical(51,10);
+    Treasure_Hunt_sequence_vertical(53,8);
+    Treasure_Hunt_sequence_vertical(55,4);
+    Treasure_Hunt_sequence_vertical(57,2);
+    Treasure_Hunt_sequence_vertical(57,7);
+    Treasure_Hunt_sequence_vertical(57,10);
+    Treasure_Hunt_sequence_vertical(59,11);
+    Treasure_Hunt_sequence_vertical(61,8);
+    Treasure_Hunt_sequence_vertical(63,6);
+    Treasure_Hunt_sequence_vertical(65,3);
+    Treasure_Hunt_sequence_vertical(67,9);
+    Treasure_Hunt_sequence_vertical(69,2);
+    Treasure_Hunt_sequence_vertical(71,4);
+    Treasure_Hunt_sequence_vertical(73,3);
+    Treasure_Hunt_sequence_vertical(75,7);
+    Treasure_Hunt_sequence_vertical(77,10);
+    Treasure_Hunt_sequence_vertical(77,4);
+    Treasure_Hunt_sequence_vertical(77,2);
+    Treasure_Hunt_sequence_vertical(79,2);
+    Treasure_Hunt_sequence_vertical(81,6);
+    Treasure_Hunt_sequence_vertical(83,9);
+    Treasure_Hunt_sequence_vertical(85,11);
+    Treasure_Hunt_sequence_vertical(87,1);
+    Treasure_Hunt_sequence_vertical(89,5);
+    Treasure_Hunt_sequence_vertical(91,9);
     
-    Path_way_sequence_vertical(29,10);
-    Path_way_sequence_vertical(37,11);
-    Path_way_sequence_vertical(39,9);
-    Path_way_sequence_vertical(47,2);
-    Path_way_sequence_vertical(61,2);
-    Path_way_sequence_vertical(63,10);
-    Path_way_sequence_vertical(71,7);
-    Path_way_sequence_vertical(71,11);
+    Treasure_Hunt_sequence_vertical(29,10);
+    Treasure_Hunt_sequence_vertical(37,11);
+    Treasure_Hunt_sequence_vertical(39,9);
+    Treasure_Hunt_sequence_vertical(47,2);
+    Treasure_Hunt_sequence_vertical(61,2);
+    Treasure_Hunt_sequence_vertical(63,10);
+    Treasure_Hunt_sequence_vertical(71,7);
+    Treasure_Hunt_sequence_vertical(71,11);
 
 
 
-    Path_way_sequence_horizontal(24,2);
-    Path_way_sequence_horizontal(26,5);
-    Path_way_sequence_horizontal(28,3);
-    Path_way_sequence_horizontal(32,3);
-    Path_way_sequence_horizontal(34,8);
-    Path_way_sequence_horizontal(36,4);
-    Path_way_sequence_horizontal(42,7);
-    Path_way_sequence_horizontal(44,10);
-    Path_way_sequence_horizontal(56,6);
-    Path_way_sequence_horizontal(58,9);
-    Path_way_sequence_horizontal(76,5);
-    Path_way_sequence_horizontal(78,3);
+    Treasure_Hunt_sequence_horizontal(24,2);
+    Treasure_Hunt_sequence_horizontal(26,5);
+    Treasure_Hunt_sequence_horizontal(28,3);
+    Treasure_Hunt_sequence_horizontal(32,3);
+    Treasure_Hunt_sequence_horizontal(34,8);
+    Treasure_Hunt_sequence_horizontal(36,4);
+    Treasure_Hunt_sequence_horizontal(42,7);
+    Treasure_Hunt_sequence_horizontal(44,10);
+    Treasure_Hunt_sequence_horizontal(56,6);
+    Treasure_Hunt_sequence_horizontal(58,9);
+    Treasure_Hunt_sequence_horizontal(76,5);
+    Treasure_Hunt_sequence_horizontal(78,3);
 
-    Path_way_sequence_horizontal(30,7);
-    Path_way_sequence_horizontal(38,6);
-    Path_way_sequence_horizontal(40,3);
-    Path_way_sequence_horizontal(40,8);
-    Path_way_sequence_horizontal(46,6);
-    Path_way_sequence_horizontal(52,5);
-    Path_way_sequence_horizontal(54,3);
-    Path_way_sequence_horizontal(62,5);
-    Path_way_sequence_horizontal(64,9);
-    Path_way_sequence_horizontal(70,10);
-    Path_way_sequence_horizontal(72,6);
-    Path_way_sequence_horizontal(84,8);
-    Path_way_sequence_horizontal(90,10);
+    Treasure_Hunt_sequence_horizontal(30,7);
+    Treasure_Hunt_sequence_horizontal(38,6);
+    Treasure_Hunt_sequence_horizontal(40,3);
+    Treasure_Hunt_sequence_horizontal(40,8);
+    Treasure_Hunt_sequence_horizontal(46,6);
+    Treasure_Hunt_sequence_horizontal(52,5);
+    Treasure_Hunt_sequence_horizontal(54,3);
+    Treasure_Hunt_sequence_horizontal(62,5);
+    Treasure_Hunt_sequence_horizontal(64,9);
+    Treasure_Hunt_sequence_horizontal(70,10);
+    Treasure_Hunt_sequence_horizontal(72,6);
+    Treasure_Hunt_sequence_horizontal(84,8);
+    Treasure_Hunt_sequence_horizontal(90,10);
 }
-void Path_direction(){
+void Treasure_Hunt(){
     int x=21,y=6;
     char a,b = 229;
-    Path_box();
-    Path_circuit();
+    Treasure_Hunt_box();
+    Treasure_Hunt_circuit();
     while(a != 48)
     {
         jump(x,y);
@@ -641,7 +657,7 @@ void Path_direction(){
                cout<<" ";
                y++;
             }
-            else if(a == 'w' && y>1 && ( x<23 || x%2==0) && ( x==48 || x==50 || x==60 || x==66 || x==68 || x==74 || x==80 || x==82 || x==86 || x==88 || x==90 || x==92 || (x==24 && y!=3) || (x==26 && y!=6) || (x==28 && y!=4) || (x==30 && y!=8) || (x==32 && y!=4) || (x==34 && y!=9) || (x==36 && y!=5) || (x==38 && y!=7) || (x==40 && y!=9 && y!=4) || (x==42 && y!=8) || (x==44 && y!=11) || (x==46 && y!=7) || (x==52 && y!=6) || (x==54 && y!=4) || (x==56 && y!=7) || (x==58 && y!=10) || (x==62 && y!=6) || (x==64 && y!=10) || (x==70 && y!=11) || (x==72 && y!=7) || (x==76 && y!=6) || (x==78 && y!=4) || (x==84 && y!=9)  ) ){
+            else if(a == 'w' && y>1 && ( x<23 || x%2==0 && ( x==21 || x==22 || x==48 || x==50 || x==60 || x==66 || x==68 || x==74 || x==80 || x==82 || x==86 || x==88 || x==90 || x==92 || (x==24 && y!=3) || (x==26 && y!=6) || (x==28 && y!=4) || (x==30 && y!=8) || (x==32 && y!=4) || (x==34 && y!=9) || (x==36 && y!=5) || (x==38 && y!=7) || (x==40 && y!=9 && y!=4) || (x==42 && y!=8) || (x==44 && y!=11) || (x==46 && y!=7) || (x==52 && y!=6) || (x==54 && y!=4) || (x==56 && y!=7) || (x==58 && y!=10) || (x==62 && y!=6) || (x==64 && y!=10) || (x==70 && y!=11) || (x==72 && y!=7) || (x==76 && y!=6) || (x==78 && y!=4) || (x==84 && y!=9) ) ) ){
                cout<<" ";
                y--;
             }
@@ -649,13 +665,37 @@ void Path_direction(){
                cout<<" ";
                x++;
             }
-            //else jump(x,y);
         }
         else break;  //Congratulations screen
     }
     jump(0,13);
 }
-//Path Finder Ends
+void Treasure_Hunt_Screen(){
+    int m;
+    box();
+    jump(38,3);
+    cout<<"----( Treasure Hunt )----\n\n";
+    Game_option();
+    jump(38,10);
+    input();
+    m = getch();
+    m -= 48;
+    switch (m)
+    {
+        case 1:
+        Treasure_Hunt();
+        break;
+        
+        case 2:
+        screen();
+        break;
+        
+        default:
+        Treasure_Hunt_Screen();
+        break;
+    }
+}
+//Treasure_Hunt Finder Ends
 
 void screen(){
     int a;
@@ -665,7 +705,7 @@ void screen(){
     cout<<"\t\t\t\t    1. Lottery - Guess the digit\n";
     cout<<"\t\t\t\t    2. Tic Tac Toe\n";
     cout<<"\t\t\t\t    3. Millionaire Quizard \n";
-    cout<<"\t\t\t\t    4. Path Finder\n";
+    cout<<"\t\t\t\t    4. Treasure Hunt\n";
     cout<<"\t\t\t\t    5. Exit\n\n\n\n";
     jump(33,11);
     input();
@@ -683,7 +723,7 @@ void screen(){
         Millionaire();
         break;
     case 4 :
-        Path_direction();
+        Treasure_Hunt_Screen();
         break;
     case 5 :
         break;
