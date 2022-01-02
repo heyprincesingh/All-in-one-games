@@ -5,6 +5,8 @@
 #include<ctime>
 #include<fstream>
 #include<windows.h>
+#include<time.h>
+
 using namespace std;
 
 void jump(int x,int y){
@@ -117,7 +119,7 @@ void guessnumber(){
     jump(32,3);
     cout<<"----(Lottery - Guess the digit)----\n\n";
     Game_option();
-    jump(33,10);
+    jump(39,10);
     input();
     l = getch();
     l -= 48;
@@ -272,7 +274,7 @@ void tictactoe(){
     jump(38,3);
     cout<<"----( Tic - Tac - Toe )----\n\n";
     Game_option();
-    jump(38,10);
+    jump(39,10);
     input();
     t = getch();
     t -= 48;
@@ -464,7 +466,7 @@ void Millionaire(){
     jump(35,3);
     cout<<"----( Millionaire Quizard )----\n\n";
     Game_option();
-    jump(38,10);
+    jump(39,10);
     input();
     m = getch();
     m -= 48;
@@ -486,7 +488,8 @@ void Millionaire(){
 //Millionaire Ends
 
 //Treasure_Hunt Finder Starts
-
+void Treasure_Hunt_Start();
+void Treasure_Hunt();
 void Treasure_Hunt_box(){
     char a,b = 229,c = 186,d = 205;
     box();
@@ -637,46 +640,92 @@ void Treasure_Hunt_circuit(){
     Treasure_Hunt_sequence_horizontal(84,8);
     Treasure_Hunt_sequence_horizontal(90,10);
 }
+void Treasure_Hunt_restart(){
+    int opt;
+    box();
+    init:
+    jump(38,3);
+    cout<<"----( Treasure Hunt )----\n\n";
+    jump(43,5);
+    cout<<"1. Play again";
+    jump(43,7);
+    cout<<"2. Exit"; 
+    jump(40,9);
+    input();
+    opt = getch();
+    opt -= 48;
+    if(opt == 1) Treasure_Hunt();
+    else if(opt == 2) screen();
+    else goto init;
+}
+time_t original_hunt_time,hunt_time;
+void Treasure_Hunt_Congo(){
+    box();
+    int total_time = hunt_time - original_hunt_time;
+    jump(44,3);
+    cout<<"!!Congratulations!!";
+    if(total_time<60){
+        jump(33,6);
+        cout<<"You did it! You took total of "<<total_time<<" Seconds";
+    }
+    else{
+        jump(27,6);
+        cout<<"You did it! You took total of "<<total_time/60<<" minutes and "<<total_time%60<<" Seconds";
+    }
+    jump(46,8);
+    cout<<"Press Enter...";
+    getch();
+    Treasure_Hunt_restart();
+}
+void hunt_timer(){
+    time(&hunt_time);
+    jump(9,9);
+    cout<<hunt_time - original_hunt_time;
+}
 void Treasure_Hunt(){
-    int x=21,y=6;
+    int x=92,y=6,flagg = 0;
+    time(&original_hunt_time);
     char a,b = 229;
     Treasure_Hunt_box();
     Treasure_Hunt_circuit();
-    while(a != 48)
-    {
-        jump(x,y);
-        cout<<b;
-        jump(x,y);
-        a = getch();
-        if(x<93){
-            if(a == 'a' && x>21 && ( x < 24 || x%2!=0 ||(x == 24 && y == 6) || (x == 26 && y == 10) || (x == 28 && y == 8) || (x == 28 && y == 4) || (x == 28 && y == 2) || (x == 30 && y == 2) || (x == 32 && y == 5) || (x == 34 && y == 11) || (x == 36 && y == 9) || (x == 36 && y == 5) || (x == 36 && y == 1) || (x == 38 && y == 2) || (x == 40 && y == 4) || (x == 42 && y == 6) || (x == 44 && y == 3) || (x == 44 && y == 8) || (x == 44 && y == 11) || (x == 46 && y == 11) || (x == 48 && y == 7) || (x == 50 && y == 3) || (x == 52 && y == 10) || (x == 54 && y == 8) || (x == 56 && y == 4) || (x == 58 && y == 2) || (x == 58 && y == 7) || (x == 58 && y == 10) || (x == 60 && y == 11) || (x == 62 && y == 8) || (x == 64 && y == 6) || (x == 66 && y == 3) || (x == 68 && y == 9) || (x == 70 && y == 2) || (x == 72 && y == 4) || (x == 74 && y == 3) || (x == 76 && y == 7) || (x == 78 && y == 10) || (x == 78 && y == 4) || (x == 78 && y == 2) || (x == 80 && y == 2) || (x == 82 && y == 6) || (x == 84 && y ==9) || (x == 86 && y ==11) || (x == 88 && y ==1) || (x == 90 && y ==5) || (x == 92 && y ==9) || (x == 30 && y == 10) || (x == 38 && y == 11) || (x == 40 && y == 9) || (x == 48 && y == 2) || (x == 62 && y == 2) || (x == 64 && y == 10) || (x == 72 && y == 7) || (x == 72 && y ==11) ) ){
-               cout<<" ";
-               x--;
-            }
-            else if(a == 's' && y<11 && ( x<23 || x%2==0 && ( x==24 || x==48 || x==50 || x==60 || x==66 || x==68 || x==74 || x==80 || x==82 || x==86 || x==88 || x==92 || (x==26 && y!=4) || (x==28 && y!=2) || (x==30 && y!=6) || (x==32 && y!=2) || (x==34 && y!=7) || (x==36 && y!=3) || (x==38 && y!=5) || (x==40 && y!=7 && y!=2) || (x==42 && y!=6) || (x==44 && y!=9) || (x==46 && y!=5) || (x==52 && y!=4) || (x==54 && y!=2) || (x==56 && y!=5) || (x==58 && y!=8) || (x==62 && y!=4) || (x==64 && y!=8) || (x==70 && y!=9) || (x==72 && y!=5) || (x==76 && y!=4) || (x==78 && y!=2) || (x==84 && y!=7) || (x==90 && y!=9)  ) ) ){
-               cout<<" ";
-               y++;
-            }
-            else if(a == 'w' && y>1 && ( x<23 || x%2==0 && ( x==21 || x==22 || x==48 || x==50 || x==60 || x==66 || x==68 || x==74 || x==80 || x==82 || x==86 || x==88 || x==90 || x==92 || (x==24 && y!=3) || (x==26 && y!=6) || (x==28 && y!=4) || (x==30 && y!=8) || (x==32 && y!=4) || (x==34 && y!=9) || (x==36 && y!=5) || (x==38 && y!=7) || (x==40 && y!=9 && y!=4) || (x==42 && y!=8) || (x==44 && y!=11) || (x==46 && y!=7) || (x==52 && y!=6) || (x==54 && y!=4) || (x==56 && y!=7) || (x==58 && y!=10) || (x==62 && y!=6) || (x==64 && y!=10) || (x==70 && y!=11) || (x==72 && y!=7) || (x==76 && y!=6) || (x==78 && y!=4) || (x==84 && y!=9) ) ) ){
-               cout<<" ";
-               y--;
-            }
-            else if(a == 'd' && x<95 && (x%2!=0 ||(x == 22 && y == 6) || (x == 24 && y == 10) || (x == 26 && y == 8) || (x == 26 && y == 4) || (x == 26 && y == 2) || (x == 28 && y == 2) || (x == 30 && y == 5) || (x == 32 && y == 11) || (x == 34 && y == 9) || (x == 34 && y == 5) || (x == 34 && y == 1) || (x == 36 && y == 2) || (x == 38 && y == 4) || (x == 40 && y == 6) || (x == 42 && y == 3) || (x == 42 && y == 8) || (x == 42 && y == 11) || (x == 44 && y == 11) || (x == 46 && y == 7) || (x == 48 && y == 3) || (x == 50 && y == 10) || (x == 52 && y == 8) || (x == 54 && y == 4) || (x == 56 && y == 2) || (x == 56 && y == 7) || (x == 56 && y == 10) || (x == 58 && y == 11) || (x == 60 && y == 8) || (x == 62 && y == 6) || (x == 64 && y == 3) || (x == 66 && y == 9) || (x == 68 && y == 2) || (x == 70 && y == 4) || (x == 72 && y == 3) || (x == 74 && y == 7) || (x == 76 && y == 10) || (x == 76 && y == 4) || (x == 76 && y == 2) || (x == 78 && y == 2) || (x == 80 && y == 6) || (x == 82 && y ==9) || (x == 84 && y ==11) || (x == 86 && y ==1) || (x == 88 && y ==5) || (x == 90 && y ==9) || (x == 92 && y == 2) || (x == 28 && y == 10) || (x == 36 && y == 11) || (x == 38 && y == 9) || (x == 46 && y == 2) || (x == 60 && y == 2) || (x == 62 && y == 10) || (x == 70 && y == 7) || (x == 70 && y ==11) ) ){
-               cout<<" ";
-               x++;
-            }
+    game:
+    while(!kbhit() && x<=94){
+        if(flagg==0){
+            hunt_timer();
+            jump(x,y);
+            cout<<b;
+            jump(x,y);
         }
-        else break;  //Congratulations screen
+        else if(flagg==1) Treasure_Hunt_Start();
     }
-    jump(0,13);
+    a = getch();
+    if(a == 48) flagg = 1;
+    if(a == 'a' && x>21 && ( x < 24 || x%2!=0 ||(x == 24 && y == 6) || (x == 26 && y == 10) || (x == 28 && y == 8) || (x == 28 && y == 4) || (x == 28 && y == 2) || (x == 30 && y == 2) || (x == 32 && y == 5) || (x == 34 && y == 11) || (x == 36 && y == 9) || (x == 36 && y == 5) || (x == 36 && y == 1) || (x == 38 && y == 2) || (x == 40 && y == 4) || (x == 42 && y == 6) || (x == 44 && y == 3) || (x == 44 && y == 8) || (x == 44 && y == 11) || (x == 46 && y == 11) || (x == 48 && y == 7) || (x == 50 && y == 3) || (x == 52 && y == 10) || (x == 54 && y == 8) || (x == 56 && y == 4) || (x == 58 && y == 2) || (x == 58 && y == 7) || (x == 58 && y == 10) || (x == 60 && y == 11) || (x == 62 && y == 8) || (x == 64 && y == 6) || (x == 66 && y == 3) || (x == 68 && y == 9) || (x == 70 && y == 2) || (x == 72 && y == 4) || (x == 74 && y == 3) || (x == 76 && y == 7) || (x == 78 && y == 10) || (x == 78 && y == 4) || (x == 78 && y == 2) || (x == 80 && y == 2) || (x == 82 && y == 6) || (x == 84 && y ==9) || (x == 86 && y ==11) || (x == 88 && y ==1) || (x == 90 && y ==5) || (x == 92 && y ==9) || (x == 30 && y == 10) || (x == 38 && y == 11) || (x == 40 && y == 9) || (x == 48 && y == 2) || (x == 62 && y == 2) || (x == 64 && y == 10) || (x == 72 && y == 7) || (x == 72 && y ==11) ) ){
+        cout<<" ";
+        x--;
+    }
+    else if(a == 's' && y<11 && ( x<23 || x%2==0 && ( x==24 || x==48 || x==50 || x==60 || x==66 || x==68 || x==74 || x==80 || x==82 || x==86 || x==88 || x==92 || (x==26 && y!=4) || (x==28 && y!=2) || (x==30 && y!=6) || (x==32 && y!=2) || (x==34 && y!=7) || (x==36 && y!=3) || (x==38 && y!=5) || (x==40 && y!=7 && y!=2) || (x==42 && y!=6) || (x==44 && y!=9) || (x==46 && y!=5) || (x==52 && y!=4) || (x==54 && y!=2) || (x==56 && y!=5) || (x==58 && y!=8) || (x==62 && y!=4) || (x==64 && y!=8) || (x==70 && y!=9) || (x==72 && y!=5) || (x==76 && y!=4) || (x==78 && y!=2) || (x==84 && y!=7) || (x==90 && y!=9)  ) ) ){
+        cout<<" ";
+        y++;
+    }
+    else if(a == 'w' && y>1 && ( x<23 || x%2==0 && ( x==21 || x==22 || x==48 || x==50 || x==60 || x==66 || x==68 || x==74 || x==80 || x==82 || x==86 || x==88 || x==90 || x==92 || (x==24 && y!=3) || (x==26 && y!=6) || (x==28 && y!=4) || (x==30 && y!=8) || (x==32 && y!=4) || (x==34 && y!=9) || (x==36 && y!=5) || (x==38 && y!=7) || (x==40 && y!=9 && y!=4) || (x==42 && y!=8) || (x==44 && y!=11) || (x==46 && y!=7) || (x==52 && y!=6) || (x==54 && y!=4) || (x==56 && y!=7) || (x==58 && y!=10) || (x==62 && y!=6) || (x==64 && y!=10) || (x==70 && y!=11) || (x==72 && y!=7) || (x==76 && y!=6) || (x==78 && y!=4) || (x==84 && y!=9) ) ) ){
+        cout<<" ";
+        y--;
+    }
+    else if(a == 'd' && x<95 && (x%2!=0 ||(x == 22 && y == 6) || (x == 24 && y == 10) || (x == 26 && y == 8) || (x == 26 && y == 4) || (x == 26 && y == 2) || (x == 28 && y == 2) || (x == 30 && y == 5) || (x == 32 && y == 11) || (x == 34 && y == 9) || (x == 34 && y == 5) || (x == 34 && y == 1) || (x == 36 && y == 2) || (x == 38 && y == 4) || (x == 40 && y == 6) || (x == 42 && y == 3) || (x == 42 && y == 8) || (x == 42 && y == 11) || (x == 44 && y == 11) || (x == 46 && y == 7) || (x == 48 && y == 3) || (x == 50 && y == 10) || (x == 52 && y == 8) || (x == 54 && y == 4) || (x == 56 && y == 2) || (x == 56 && y == 7) || (x == 56 && y == 10) || (x == 58 && y == 11) || (x == 60 && y == 8) || (x == 62 && y == 6) || (x == 64 && y == 3) || (x == 66 && y == 9) || (x == 68 && y == 2) || (x == 70 && y == 4) || (x == 72 && y == 3) || (x == 74 && y == 7) || (x == 76 && y == 10) || (x == 76 && y == 4) || (x == 76 && y == 2) || (x == 78 && y == 2) || (x == 80 && y == 6) || (x == 82 && y ==9) || (x == 84 && y ==11) || (x == 86 && y ==1) || (x == 88 && y ==5) || (x == 90 && y ==9) || (x == 92 && y == 2) || (x == 28 && y == 10) || (x == 36 && y == 11) || (x == 38 && y == 9) || (x == 46 && y == 2) || (x == 60 && y == 2) || (x == 62 && y == 10) || (x == 70 && y == 7) || (x == 70 && y ==11) ) ){
+        cout<<" ";
+        x++;
+    }
+    if(x>=94) Treasure_Hunt_Congo();
+    goto game;
 }
-void Treasure_Hunt_Screen(){
+void Treasure_Hunt_Start(){
     int m;
     box();
     jump(38,3);
     cout<<"----( Treasure Hunt )----\n\n";
     Game_option();
-    jump(38,10);
+    jump(39,10);
     input();
     m = getch();
     m -= 48;
@@ -691,7 +740,7 @@ void Treasure_Hunt_Screen(){
         break;
         
         default:
-        Treasure_Hunt_Screen();
+        Treasure_Hunt_Start();
         break;
     }
 }
@@ -700,14 +749,14 @@ void Treasure_Hunt_Screen(){
 void screen(){
     int a;
     box();
-    jump(32,3);
+    jump(33,3);
     cout<<"Welcome to All-in-One Gaming Console\n\n";
-    cout<<"\t\t\t\t    1. Lottery - Guess the digit\n";
-    cout<<"\t\t\t\t    2. Tic Tac Toe\n";
-    cout<<"\t\t\t\t    3. Millionaire Quizard \n";
-    cout<<"\t\t\t\t    4. Treasure Hunt\n";
-    cout<<"\t\t\t\t    5. Exit\n\n\n\n";
-    jump(33,11);
+    cout<<"\t\t\t\t     1. Lottery - Guess the digit\n";
+    cout<<"\t\t\t\t     2. Tic Tac Toe\n";
+    cout<<"\t\t\t\t     3. Millionaire Quizard \n";
+    cout<<"\t\t\t\t     4. Treasure Hunt\n";
+    cout<<"\t\t\t\t     5. Exit";
+    jump(38,11);
     input();
     a = getch();
     a -= 48;
@@ -723,9 +772,11 @@ void screen(){
         Millionaire();
         break;
     case 4 :
-        Treasure_Hunt_Screen();
+        Treasure_Hunt_Start();
         break;
     case 5 :
+        jump(0,13);
+        exit(0);
         break;
     default:
         screen();
